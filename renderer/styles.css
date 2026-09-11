@@ -1,0 +1,103 @@
+:root {
+  --bg: #14161a;
+  --bar: #1c2027;
+  --line: #2b313b;
+  --fg: #e6e9ef;
+  --dim: #8d96a5;
+  --accent: #4a9eff;
+  --ok: #4ec97a;
+  --warn: #e8b046;
+  --err: #ef6b6b;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0; display: flex; flex-direction: column; height: 100vh;
+  background: var(--bg); color: var(--fg);
+  font: 13px/1.45 -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+.bar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 10px; background: var(--bar); border-bottom: 1px solid var(--line);
+  flex: 0 0 auto;
+}
+.bar.sub { padding: 5px 10px; }
+.grow { flex: 1; }
+.tabs { display: flex; gap: 4px; }
+.tab {
+  background: transparent; color: var(--dim); border: 1px solid transparent;
+  padding: 5px 12px; border-radius: 7px; cursor: pointer; font-size: 13px;
+}
+.tab:hover { color: var(--fg); background: #232833; }
+.tab.active { color: var(--fg); background: #2b3340; border-color: var(--accent); }
+.tab b {
+  display: inline-block; width: 16px; height: 16px; line-height: 16px; margin-right: 6px;
+  border-radius: 50%; background: #39414f; color: var(--fg); font-size: 10px; text-align: center;
+}
+.tab.active b { background: var(--accent); color: #06121f; }
+button { font-family: inherit; }
+.ghost {
+  background: #232833; color: var(--fg); border: 1px solid var(--line);
+  padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+}
+.ghost:hover { background: #2c323d; }
+.ghost.icon { padding: 4px 9px; font-size: 15px; line-height: 1; }
+.primary {
+  background: var(--accent); color: #06121f; border: 1px solid var(--accent);
+  padding: 5px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;
+}
+.primary:disabled, .ghost:disabled { opacity: .4; cursor: default; }
+input[type=text], input[type=password] {
+  flex: 1; min-width: 0; background: #10131a; color: var(--fg);
+  border: 1px solid var(--line); border-radius: 6px; padding: 5px 9px; font-size: 12px;
+  font-family: inherit;
+}
+input:focus { outline: none; border-color: var(--accent); }
+.pill {
+  font-size: 11px; color: var(--dim); border: 1px solid var(--line);
+  border-radius: 999px; padding: 3px 9px; white-space: nowrap;
+}
+.pill.in { color: var(--ok); border-color: #2f5c3f; }
+.pill.out { color: var(--warn); border-color: #5c4b2f; }
+.loader {
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid var(--line); border-top-color: var(--accent);
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#stack { position: relative; flex: 1 1 auto; min-height: 0; background: #0e1014; }
+.pane {
+  /* display:flex is required — without it the webview's internal iframe
+     collapses to the default 150px and the page paints black. */
+  display: flex;
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  visibility: hidden; pointer-events: none; z-index: 0;
+}
+.pane.active { visibility: visible; pointer-events: auto; z-index: 2; }
+
+footer { flex: 0 0 auto; }
+.result { border-top: 1px solid var(--line); border-bottom: none; }
+.label { color: var(--dim); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+.log {
+  list-style: none; margin: 0; padding: 6px 10px; max-height: 190px; overflow: auto;
+  background: #0e1014; border-top: 1px solid var(--line);
+  font: 11.5px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.log li { color: var(--dim); white-space: pre-wrap; word-break: break-all; }
+.log li .t { color: #5c6675; margin-right: 8px; }
+.log li.warn { color: var(--warn); }
+.log li.error { color: var(--err); }
+
+dialog {
+  border: 1px solid var(--line); border-radius: 12px; background: var(--bar); color: var(--fg);
+  width: 480px; max-width: 92vw; padding: 18px 20px;
+}
+dialog::backdrop { background: rgba(0,0,0,.55); }
+dialog h2 { margin: 0 0 14px; font-size: 15px; }
+dialog label { display: block; margin-bottom: 11px; font-size: 11px; color: var(--dim); }
+dialog label input[type=text], dialog label input[type=password] { display: block; width: 100%; margin-top: 4px; font-size: 12px; }
+dialog .row { display: flex; gap: 6px; align-items: center; margin-top: 4px; }
+dialog label.check { color: var(--fg); font-size: 12px; display: flex; align-items: center; gap: 7px; }
+dialog menu { display: flex; justify-content: flex-end; gap: 8px; padding: 0; margin: 16px 0 0; }
+.hint { color: var(--dim); font-size: 11px; margin: -4px 0 12px; }

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:;" />
+  <title>Fshare Tabs</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="bar">
+    <div class="tabs" id="tabs">
+      <button class="tab" data-pane="0"><b>1</b> Google Sheet</button>
+      <button class="tab" data-pane="1"><b>2</b> Fshare Explorer</button>
+      <button class="tab" data-pane="2"><b>3</b> Fshare</button>
+    </div>
+    <div class="grow"></div>
+    <span class="pill" id="loginPill">Fshare: unknown</span>
+    <button class="ghost" id="signInBtn" title="Sign in to Fshare with the saved account">Sign in</button>
+    <button class="ghost" id="settingsBtn" title="Settings">Settings</button>
+  </header>
+
+  <nav class="bar sub">
+    <button class="ghost icon" id="backBtn" title="Back">&#8249;</button>
+    <button class="ghost icon" id="fwdBtn" title="Forward">&#8250;</button>
+    <button class="ghost icon" id="reloadBtn" title="Reload">&#8635;</button>
+    <button class="ghost icon" id="homeBtn" title="Home">&#8962;</button>
+    <input id="addr" type="text" spellcheck="false" placeholder="Address" />
+    <button class="ghost" id="goBtn">Go</button>
+    <span class="loader" id="loader" hidden></span>
+  </nav>
+
+  <main id="stack">
+    <webview id="pane0" class="pane" partition="persist:fsharetabs" allowpopups src="about:blank"></webview>
+    <webview id="pane1" class="pane" partition="persist:fsharetabs" allowpopups src="about:blank"></webview>
+    <webview id="pane2" class="pane" partition="persist:fsharetabs" allowpopups src="about:blank"></webview>
+  </main>
+
+  <footer>
+    <div class="bar result">
+      <span class="label">Download link</span>
+      <input id="lastLink" type="text" readonly placeholder="Nothing captured yet — click Download in tab 3" />
+      <button class="primary" id="playBtn" disabled>&#9654; Play in VLC</button>
+      <button class="ghost" id="copyBtn" disabled>Copy</button>
+      <button class="ghost" id="logBtn">Activity</button>
+    </div>
+    <ul class="log" id="log" hidden></ul>
+  </footer>
+
+  <dialog id="settings">
+    <form method="dialog" id="settingsForm">
+      <h2>Settings</h2>
+
+      <label>Fshare e-mail
+        <input id="setEmail" type="text" autocomplete="off" spellcheck="false" />
+      </label>
+      <label>Fshare password
+        <input id="setPassword" type="password" autocomplete="off" placeholder="(unchanged)" />
+      </label>
+      <p class="hint" id="cryptoHint"></p>
+
+      <label>Google Sheet URL
+        <input id="setSheet" type="text" spellcheck="false" />
+      </label>
+
+      <label>VLC path (optional)
+        <span class="row">
+          <input id="setVlc" type="text" spellcheck="false" placeholder="auto-detect" />
+          <button type="button" class="ghost" id="pickVlcBtn">Browse…</button>
+        </span>
+      </label>
+
+      <label class="check"><input id="setAutoPlay" type="checkbox" /> Open captured links in VLC automatically</label>
+      <label class="check"><input id="setAutoLogin" type="checkbox" /> Sign in to Fshare automatically</label>
+      <label class="check"><input id="setAutoSubmit" type="checkbox" /> Auto-search after pasting a link in tab 2</label>
+
+      <menu>
+        <button value="cancel" class="ghost">Cancel</button>
+        <button value="save" class="primary" id="saveBtn">Save</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+{
+  "name": "fshare-tabs",
+  "version": "1.0.0",
+  "description": "3-tab desktop browser: Google Sheet -> Fshare folder explorer -> Fshare download -> VLC",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win --x64",
+    "dist:win:arm": "electron-builder --win --arm64",
+    "dist:mac:tar": "node tools/make-tarballs.js",
+    "dist:mac:signed": "electron-builder --mac --x64 --arm64 --config electron-builder.signed.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "build": {
+    "appId": "com.local.fsharetabs",
+    "productName": "Fshare Tabs",
+    "files": [
+      "main.js",
+      "preload-host.js",
+      "preload-web.js",
+      "inject.js",
+      "renderer/**",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ],
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Utility"
+    },
+    "afterPack": "tools/afterPack.js",
+    "nsis": {
+      "artifactName": "${productName}-Setup-${version}-${arch}.${ext}",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "portable": {
+      "artifactName": "${productName}-Portable-${version}-${arch}.${ext}"
+    }
+  },
+  "devDependencies": {
+    "electron": "^44.3.0",
+    "electron-builder": "^26.15.3"
+  }
+}
