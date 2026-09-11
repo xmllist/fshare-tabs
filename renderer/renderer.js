@@ -21,7 +21,23 @@ function select(n) {
   active = n;
   panes.forEach((p, i) => p.classList.toggle('active', i === n));
   tabs.forEach((t, i) => t.classList.toggle('active', i === n));
+  repaint(panes[n]);
   syncToolbar();
+}
+
+/**
+ * A <webview> stops compositing while it is hidden, so the tab you switch to can
+ * show a blank pane until something happens to force a redraw. Nudging its height
+ * by a pixel makes the guest produce a fresh frame straight away.
+ * (Stacking the tabs by z-index instead of hiding them is not an alternative —
+ * guest surfaces ignore z-index and the wrong page ends up on top.)
+ */
+function repaint(wv) {
+  if (!wv) return;
+  wv.style.height = 'calc(100% - 1px)';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => { wv.style.height = ''; });
+  });
 }
 tabs.forEach((t) => t.addEventListener('click', () => select(Number(t.dataset.pane))));
 

@@ -1,3 +1,5 @@
+**English** · [Tiếng Việt](README.vi.md)
+
 # Fshare Tabs
 
 A small cross-platform desktop app (Electron) that chains together the flow:
@@ -187,3 +189,8 @@ The **Activity** button at the bottom shows exactly what the app captured and di
 * Pages run with node integration off and context isolation on.
 * If VLC can't be started, the link is still on your clipboard — paste it into
   VLC → File → Open Network Stream.
+* A `<webview>` must have `display: flex`, or its internal iframe collapses to 150px and
+  the page renders black.
+* A webview stops compositing while hidden, so switching tabs forces it to repaint.
+  Stacking the tabs with z-index instead of hiding them is not an alternative: guest
+  surfaces ignore z-index and the wrong page ends up on top.
