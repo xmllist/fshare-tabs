@@ -15,7 +15,16 @@ VLC                         download URL is streamed, not saved
 Nothing is downloaded to disk — the download is intercepted and the URL is handed
 straight to VLC (and copied to your clipboard as a backup).
 
-## Run it
+## Download
+
+Prebuilt apps are on the [releases page](https://github.com/xmllist/fshare-tabs/releases/latest):
+macOS (Apple Silicon and Intel, needs macOS 13+) and Windows (x64 installer, x64 portable,
+ARM installer). VLC must be installed separately.
+
+Neither platform's build is code-signed — see [Getting past "app is damaged"](#getting-past-app-is-damaged-on-another-mac)
+below for macOS, and choose **More info → Run anyway** on the Windows SmartScreen prompt.
+
+## Run it from source
 
 ```bash
 npm install
