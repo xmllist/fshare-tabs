@@ -1,6 +1,6 @@
 {
   "name": "fshare-tabs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "3-tab desktop browser: Google Sheet -> Fshare folder explorer -> Fshare download -> VLC",
   "main": "main.js",
   "scripts": {

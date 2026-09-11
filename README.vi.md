@@ -104,8 +104,8 @@ chỉ nén lại thôi là không đủ.
 Trên máy đích:
 
 ```bash
-curl -LO https://github.com/xmllist/fshare-tabs/releases/download/v1.0.0/Fshare-Tabs-1.0.0-mac-arm64.tar.gz
-tar -xzf Fshare-Tabs-1.0.0-mac-arm64.tar.gz
+curl -LO https://github.com/xmllist/fshare-tabs/releases/download/v1.0.1/Fshare-Tabs-1.0.1-mac-arm64.tar.gz
+tar -xzf Fshare-Tabs-1.0.1-mac-arm64.tar.gz
 mv "Fshare Tabs.app" /Applications/
 ```
 
