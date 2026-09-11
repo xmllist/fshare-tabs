@@ -24,6 +24,42 @@ ARM installer). VLC must be installed separately.
 Neither platform's build is code-signed — see [Getting past "app is damaged"](#getting-past-app-is-damaged-on-another-mac)
 below for macOS, and choose **More info → Run anyway** on the Windows SmartScreen prompt.
 
+## What it looks like
+
+![One click in the sheet opens the folder in tab 2; picking a file loads it in tab 3](docs/demo.gif)
+
+Click an Fshare link in the sheet → the folder opens in the explorer → pick a file and it
+loads in Fshare, already signed in. Pressing **Tải nhanh** then hands the real URL to VLC.
+
+### Tab 1 — the Google Sheet
+
+![The sheet with an Fshare folder link selected](docs/screenshot-1-sheet.png)
+
+The sheet loads exactly as it does in a browser. Clicking any `fshare.vn` link is
+intercepted instead of opening a new window.
+
+### Tab 2 — the folder explorer
+
+![The folder open in the Fshare explorer, with the link already pasted](docs/screenshot-2-explorer.png)
+
+The folder code is opened directly, and the original link is typed into the site's own
+search box. Clicking a file name — or its **Copy link** button — sends it to tab 3.
+
+### Tab 3 — Fshare, already signed in
+
+![The Fshare file page with the download button](docs/screenshot-3-fshare.png)
+
+The tab signs itself in with your stored account, so the download button is ready
+immediately. Pressing it never writes a file: the URL is captured and streamed in VLC.
+*(The account e-mail is replaced with a placeholder in these screenshots.)*
+
+### Settings
+
+![The settings dialog with the two credential fields](docs/screenshot-4-settings.png)
+
+Two fields for the Fshare account, plus the sheet URL, the VLC path, and the automation
+toggles.
+
 ## Run it from source
 
 ```bash
